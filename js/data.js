@@ -10,7 +10,7 @@ const GROUPS = [
     id: 1,
     name: "Group 1",
     color: "#ef476f",
-    members: ["Ahnaf", "Karthik", "Krishnaram", "Samad", "Nandhu"],
+    members: ["Ahnaf", "Karthik", "Krishnaram", "Samad", "Nandhu", "Albyalu"],
     completedTasks: [],
     avatar: "1"
   },
