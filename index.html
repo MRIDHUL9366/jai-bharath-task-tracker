@@ -4,12 +4,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Prevent Aggressive Mobile Browser Caching -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
   <title>Group Task Race</title>
   <link rel="stylesheet" href="css/style.css" />
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <!-- Chart.js CDN (v4) -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 
 <body>
@@ -27,12 +31,8 @@
     <!-- Dashboard Section -->
     <section id="dashboard" class="section">
       <div class="summary-cards" id="summary-cards"></div>
-      <div class="current-leader" id="current-leader"></div>
       <div class="leaderboard" id="leaderboard"></div>
       <div class="progress-bars" id="progress-bars"></div>
-      <div class="chart-container" id="chart-container">
-        <canvas id="groupChart"></canvas>
-      </div>
     </section>
 
     <!-- Groups Section -->
@@ -57,9 +57,37 @@
     </div>
   </div>
 
-  <!-- Data and App Scripts -->
-  <script src="js/data.js"></script>
-  <script src="js/app.js"></script>
+  <!-- Dynamic Anti-Cache Script Loader -->
+  <script>
+    (function () {
+      // Generate a unique timestamp query parameter on every page load
+      const timestamp = new Date().getTime();
+
+      // Dynamically load CSS with anti-cache query param
+      const links = document.querySelectorAll('link[rel="stylesheet"]');
+      links.forEach(link => {
+        if (link.href && link.href.includes('css/style.css')) {
+          link.href = link.href.split('?')[0] + '?v=' + timestamp;
+        }
+      });
+
+      function loadScript(src, callback) {
+        const script = document.createElement('script');
+        script.src = src + '?v=' + timestamp;
+        script.onload = callback;
+        document.body.appendChild(script);
+      }
+
+      // Load data.js first (fresh each time), then load app.js
+      loadScript('js/data.js', function () {
+        loadScript('js/app.js', function () {
+          if (typeof init === 'function') {
+            init();
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 
 </html>
