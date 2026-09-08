@@ -27,7 +27,7 @@ const GROUPS = [
     name: "Group 3",
     color: "#ffd166",
     members: ["Arathi", "Ananya", "Arsaina", "Aneeta"],
-    completedTasks: [1, 2, 3],
+    completedTasks: [1],
     avatar: "3"
   },
   {
@@ -51,7 +51,7 @@ const GROUPS = [
     name: "Group 6",
     color: "#f77f00",
     members: ["Ambady", "Yazeen", "Sinan", "Vishnu", "Abhinav", "Adil T", "Ashfaq"],
-    completedTasks: [1, 2],
+    completedTasks: [],
     avatar: "6"
   },
   {
@@ -97,20 +97,5 @@ const TASKS = [
     id: 1,
     title: "Task 1",
     dueDate: "2026-09-07"
-  },
-  {
-    id: 2,
-    title: "Task 2",
-    dueDate: "2026-09-08"
-  },
-  {
-    id: 3,
-    title: "Task 3",
-    dueDate: "2026-09-08"
-  },
-  {
-    id: 4,
-    title: "Task 4",
-    dueDate: "2026-09-08"
   }
 ];

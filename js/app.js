@@ -219,8 +219,7 @@ function renderTaskList() {
     const completedChips = completedBy
       .map(
         (g) =>
-          `<span class="task-group-chip"
-                 style="background:${g.color}18;border-color:${g.color}55;color:${g.color};">
+          `<span class="task-group-chip chip-green">
              ✅ ${g.name}
            </span>`
       )
@@ -229,9 +228,8 @@ function renderTaskList() {
     const pendingChips = pendingBy
       .map(
         (g) =>
-          `<span class="task-group-chip"
-                 style="background:#e6394618;border-color:#e6394655;color:#e63946;">
-             ⏳ ${g.name}
+          `<span class="task-group-chip chip-red">
+             ❌ ${g.name}
            </span>`
       )
       .join("");
@@ -242,18 +240,23 @@ function renderTaskList() {
 
     return `
       <div class="task-card">
-        <div>
-          <div class="task-title">${t.title}</div>
-          <div class="task-date">📅 Assigned Date: ${due}</div>
+        <div class="task-card-header">
+          <h3 class="task-title">${t.title}</h3>
+          <span class="task-date-pill">📅 Assigned Date: ${due}</span>
         </div>
-        <div class="task-note">📝 Note: Complete the task before the assigned date.</div>
+
+        <p class="task-note">📝 Note: Complete the task before the assigned date.</p>
+        
         <hr class="task-divider">
-        <div>
-          <p style="font-size:0.76rem;color:var(--muted);text-transform:uppercase;
-                    letter-spacing:0.06em;margin-bottom:0.5rem;">
-            Completion Status (${completedBy.length} / ${GROUPS.length} groups done)
-          </p>
-          <div class="task-groups-grid">${completedChips}${pendingChips}</div>
+
+        <div class="task-status-container">
+          <div class="task-status-label">
+            <span>Group Status (${completedBy.length} / ${GROUPS.length} Done)</span>
+          </div>
+          <div class="task-groups-grid">
+            ${completedChips}
+            ${pendingChips}
+          </div>
         </div>
       </div>`;
   }).join("");
