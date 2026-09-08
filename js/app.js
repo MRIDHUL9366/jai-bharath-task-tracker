@@ -96,13 +96,14 @@ function renderLeaderboard() {
     .map(
       (g, i) => `
     <tr>
-      <td style="font-size:1.1rem;">${medals[i] || i + 1}</td>
-      <td>
-        <span style="display:inline-block;width:9px;height:9px;background:${g.color};border-radius:50%;margin-right:5px;"></span>
-        ${g.name}
+      <td class="col-rank">${medals[i] || (i + 1)}</td>
+      <td class="col-group">
+        <div class="group-cell">
+          <span class="group-color-dot" style="background:${g.color};"></span>
+          <span class="group-name-text">${g.name}</span>
+        </div>
       </td>
-      <td>${g.completedTasks.length} / ${TASKS.length}</td>
-      <td>${completionPct(g)}%</td>
+      <td class="col-completion">${completionPct(g)}%</td>
     </tr>`
     )
     .join("");
@@ -112,7 +113,11 @@ function renderLeaderboard() {
       <p class="section-heading">🏅 Leaderboard</p>
       <table class="leaderboard-table">
         <thead>
-          <tr><th>#</th><th>Group</th><th>Tasks Done</th><th>Completion</th></tr>
+          <tr>
+            <th class="col-rank">#</th>
+            <th class="col-group">Group</th>
+            <th class="col-completion">Completion</th>
+          </tr>
         </thead>
         <tbody>${rows}</tbody>
       </table>
