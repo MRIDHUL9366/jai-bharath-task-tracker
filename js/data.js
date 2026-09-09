@@ -35,7 +35,7 @@ const GROUPS = [
     name: "Group 4",
     color: "#118ab2",
     members: ["Reema Ruhana", "Soudha Bheegam", "Suhaima Najeeb", "Thasha Nafsa"],
-    completedTasks: [],
+    completedTasks: [1, 2],
     avatar: "4"
   },
   {
@@ -91,7 +91,7 @@ const GROUPS = [
     name: "Group 11",
     color: "#402c4fff",
     members: ['Ben', 'Benet', 'Akash', 'Hari Krishnan', 'Suryajith', 'Sreenath'],
-    completedTasks: [],
+    completedTasks: [1],
     avatar: "11"
   }
 
