@@ -11,15 +11,15 @@ const GROUPS = [
     name: "Group 1",
     color: "#ef476f",
     members: ["Ahnaf", "Karthik", "Krishnaram", "Samad", "Nandhu", "Albyalu"],
-    completedTasks: [],
+    completedTasks: [1],
     avatar: "1"
   },
   {
     id: 2,
     name: "Group 2",
     color: "#06d6a0",
-    members: ["Amos", "Akshay K", "Abhinav Krishna KV", "Abiprasad"],
-    completedTasks: [],
+    members: ["Amos", "Akshay K", "Abhinav Krishna KV", "Abiprasad", "Nandhana"],
+    completedTasks: [1, 2],
     avatar: "2"
   },
   {
@@ -27,7 +27,7 @@ const GROUPS = [
     name: "Group 3",
     color: "#ffd166",
     members: ["Arathi", "Ananya", "Arsaina", "Aneeta"],
-    completedTasks: [1],
+    completedTasks: [1, 2],
     avatar: "3"
   },
   {
@@ -82,9 +82,17 @@ const GROUPS = [
     id: 10,
     name: "Group 10",
     color: "#c77dff",
-    members: ["Nandana", "Shana", "Shahma", "Nuzha"],
+    members: ["Shana", "Shahma", "Nuzha"],
     completedTasks: [],
     avatar: "10"
+  },
+  {
+    id: 11,
+    name: "Group 11",
+    color: "#402c4fff",
+    members: ['Ben', 'Benet', 'Akash', 'Hari Krishnan', 'Suryajith', 'Sreenath'],
+    completedTasks: [],
+    avatar: "11"
   }
 
 ];
@@ -97,5 +105,10 @@ const TASKS = [
     id: 1,
     title: "Task 1",
     dueDate: "2026-09-07"
+  },
+  {
+    id: 2,
+    title: "Task 2",
+    dueDate: "2026-09-08"
   }
 ];
