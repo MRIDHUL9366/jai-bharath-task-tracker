@@ -18,7 +18,7 @@ const GROUPS = [
     id: 2,
     name: "Group 2",
     color: "#06d6a0",
-    members: ["Amos", "Akshay K", "Abhinav Krishna KV", "Abiprasad", "Nandhana"],
+    members: ["Amos", "Akshay K", "Abhinav Krishna KV", "Abiprasad", "Nandhana", "Sanjay ps"],
     completedTasks: [1, 2],
     avatar: "2"
   },
@@ -110,5 +110,11 @@ const TASKS = [
     id: 2,
     title: "Task 2",
     dueDate: "2026-09-08"
+  },
+  {
+    id: 3,
+    title: "Task 3",
+    dueDate: "2026-09-09"
   }
+
 ];
