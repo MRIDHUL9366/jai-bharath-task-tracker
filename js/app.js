@@ -110,7 +110,7 @@ function renderLeaderboard() {
 
   $("leaderboard").innerHTML = `
     <div class="card">
-      <p class="section-heading">🏅 Leaderboard</p>
+      <p class="section-heading">🏆 Batch Standings & Rankings</p>
       <table class="leaderboard-table">
         <thead>
           <tr>

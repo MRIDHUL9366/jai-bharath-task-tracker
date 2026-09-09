@@ -78,12 +78,14 @@
         document.body.appendChild(script);
       }
 
-      // Load data.js first (fresh each time), then load app.js
+      // Load data.js first (fresh each time), then load performer.js and app.js
       loadScript('js/data.js', function () {
-        loadScript('js/app.js', function () {
-          if (typeof init === 'function') {
-            init();
-          }
+        loadScript('js/performer.js', function () {
+          loadScript('js/app.js', function () {
+            if (typeof init === 'function') {
+              init();
+            }
+          });
         });
       });
     })();
