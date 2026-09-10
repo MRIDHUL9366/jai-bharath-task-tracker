@@ -19,7 +19,7 @@ const GROUPS = [
     name: "Group 2",
     color: "#06d6a0",
     members: ["Amos", "Akshay K", "Abhinav Krishna KV", "Abiprasad", "Nandhana", "Sanjay ps"],
-    completedTasks: [1, 2],
+    completedTasks: [1, 2, 3],
     avatar: "2"
   },
   {
