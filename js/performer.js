@@ -10,13 +10,13 @@
 
 const PERFORMER_OF_THE_DAY = {
   enabled: true, // 💡 Set to false to disable/remove the popup entirely!
-  batch: "Batch A",
-  groupName: "Group 3",
-  badge: "🔥 MAIN CHARACTER ENERGY",
-  subtitle: "Performer of the Day",
-  date: "Today's Spotlight",
-  members: ["Arathi", "Ananya", "Arsaina", "Aneeta"],
-  shoutout: "No cap, absolute GOATs! 🐐 Smashed their tasks & staying on top of the leaderboard! 🚀✨"
+  batch: "Batch 2",
+  groupName: "Group 2",
+  badge: "⚡ UNSTOPPABLE CHAMPIONS ⚡",
+  subtitle: "Top Performer Spotlight",
+  date: "Today's Feature",
+  members: ["Amos", "Akshay K", "Abhinav Krishna KV", "Abiprasad", "Nandhana", "Sanjay ps"],
+  shoutout: "Pure dominance! 🚀🔥 Crushing milestones with unmatched teamwork and lightning speed! Keep setting the bar high! 🌟💯"
 };
 
 // ─── Gen-Z Performer Popup Logic ─────────────────────────────────────────────
