@@ -1041,3 +1041,114 @@ body {
     opacity: 0;
   }
 }
+
+/* ── Mobile Responsive Enhancements for Performer Modal ── */
+@media (max-width: 600px) {
+  .genz-popup-overlay {
+    padding: 0.75rem;
+    align-items: center;
+  }
+
+  .genz-popup-card {
+    padding: 2.2rem 1.25rem 1.6rem;
+    border-radius: 22px;
+    max-height: 90vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .genz-popup-card::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .genz-popup-card::-webkit-scrollbar-thumb {
+    background: rgba(16, 185, 129, 0.4);
+    border-radius: 4px;
+  }
+
+  .genz-close-btn {
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    font-size: 0.85rem;
+  }
+
+  .genz-floating-emoji {
+    display: none; /* Hide floating emojis on small screens to prevent overlapping */
+  }
+
+  .genz-batch-badge {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.75rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .genz-badge {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.95rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.35rem;
+  }
+
+  .genz-subhead {
+    font-size: 0.74rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .genz-group-spotlight {
+    margin: 0.2rem 0 0.7rem;
+  }
+
+  .genz-group-title {
+    font-size: clamp(2rem, 9vw, 2.4rem);
+  }
+
+  .genz-members-section {
+    padding: 0.85rem 0.65rem;
+    border-radius: 16px;
+    margin-bottom: 0.85rem;
+  }
+
+  .genz-members-label {
+    font-size: 0.7rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .genz-members-list {
+    gap: 0.35rem;
+  }
+
+  .genz-member-tag {
+    font-size: 0.78rem;
+    padding: 0.3rem 0.7rem;
+  }
+
+  .genz-shoutout-box {
+    font-size: 0.84rem;
+    padding: 0.6rem 0.75rem;
+    margin-bottom: 1.1rem;
+    line-height: 1.4;
+  }
+
+  .genz-action-btn {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .genz-popup-card {
+    padding: 2rem 0.9rem 1.3rem;
+  }
+
+  .genz-group-title {
+    font-size: 1.8rem;
+  }
+
+  .genz-member-tag {
+    font-size: 0.74rem;
+    padding: 0.25rem 0.55rem;
+  }
+}
