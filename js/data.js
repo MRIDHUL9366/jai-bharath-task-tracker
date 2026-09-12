@@ -91,13 +91,13 @@ const GROUPS = [
     name: "Group 11",
     color: "#402c4fff",
     members: ['Ben', 'Benet', 'Akash', 'Hari Krishnan', 'Suryajith', 'Sreenath'],
-    completedTasks: [1, 2, 3],
+    completedTasks: [1, 2, 3, 4],
     avatar: "11"
   },
   {
     id: 12,
     name: "Group 12",
-    color: "#402c4fff",
+    color: "#4e12d1ff",
     members: ['Ranjusha', 'Reniya', 'Linsa'],
     completedTasks: [1, 2, 3, 4],
     avatar: "12"
