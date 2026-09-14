@@ -128,6 +128,11 @@ const TASKS = [
     id: 4,
     title: "Task 4",
     dueDate: "2026-09-10"
+  },
+  {
+    id: 5,
+    title: "Task 5",
+    dueDate: "2026-09-24"
   }
 
 ];
