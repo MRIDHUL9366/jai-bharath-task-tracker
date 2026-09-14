@@ -57,7 +57,28 @@
     </div>
   </div>
 
-  <!-- Dynamic Anti-Cache Script Loader -->
+  <!-- Theme Switcher (Floating) -->
+  <div class="theme-switcher" id="theme-switcher">
+    <div class="theme-swatches" id="theme-swatches">
+      <button class="theme-swatch swatch-light active" data-theme="light" data-tooltip="Light Teal" aria-label="Light theme"></button>
+      <button class="theme-swatch swatch-dark" data-theme="dark" data-tooltip="Dark Obsidian" aria-label="Dark theme"></button>
+      <button class="theme-swatch swatch-sunset" data-theme="sunset" data-tooltip="Sunset Blaze" aria-label="Sunset theme"></button>
+      <button class="theme-swatch swatch-ocean" data-theme="ocean" data-tooltip="Ocean Deep" aria-label="Ocean theme"></button>
+      <button class="theme-swatch swatch-neon" data-theme="neon" data-tooltip="Neon Cyber" aria-label="Neon theme"></button>
+    </div>
+    <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Switch theme">🎨</button>
+  </div>
+
+  <!-- Theme Initialization (runs BEFORE anything else renders) -->
+  <script>
+    (function initTheme() {
+      const saved = localStorage.getItem('gtr-theme');
+      if (saved && saved !== 'light') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    })();
+  </script>
+
   <script>
     (function () {
       // Generate a unique timestamp query parameter on every page load
@@ -85,9 +106,62 @@
             if (typeof init === 'function') {
               init();
             }
+            // Initialize theme switcher after app is ready
+            initThemeSwitcher();
           });
         });
       });
+
+      function initThemeSwitcher() {
+        const switcher = document.getElementById('theme-switcher');
+        const toggleBtn = document.getElementById('theme-toggle-btn');
+        const swatches = document.querySelectorAll('.theme-swatch');
+
+        // Restore active swatch from localStorage
+        const currentTheme = localStorage.getItem('gtr-theme') || 'light';
+        swatches.forEach(function (sw) {
+          sw.classList.toggle('active', sw.dataset.theme === currentTheme);
+        });
+
+        // Toggle panel open/close
+        toggleBtn.addEventListener('click', function () {
+          switcher.classList.toggle('open');
+        });
+
+        // Close panel when clicking outside
+        document.addEventListener('click', function (e) {
+          if (!switcher.contains(e.target)) {
+            switcher.classList.remove('open');
+          }
+        });
+
+        // Switch theme on swatch click
+        swatches.forEach(function (sw) {
+          sw.addEventListener('click', function () {
+            var theme = sw.dataset.theme;
+
+            // Update data-theme attribute
+            if (theme === 'light') {
+              document.documentElement.removeAttribute('data-theme');
+            } else {
+              document.documentElement.setAttribute('data-theme', theme);
+            }
+
+            // Update active state
+            swatches.forEach(function (s) { s.classList.remove('active'); });
+            sw.classList.add('active');
+
+            // Persist choice
+            localStorage.setItem('gtr-theme', theme);
+
+            // Rotate the palette icon for feedback
+            toggleBtn.style.transform = 'rotate(360deg)';
+            setTimeout(function () {
+              toggleBtn.style.transform = '';
+            }, 400);
+          });
+        });
+      }
     })();
   </script>
 </body>
