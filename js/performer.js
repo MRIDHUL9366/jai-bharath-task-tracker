@@ -5,17 +5,23 @@
 
 const PERFORMER_OF_THE_DAY = {
   enabled: true, // 💡 Set to false to disable/remove the popup entirely!
-  badge: "⚠️ ATTENDANCE & SUBMISSION ALERT ⚠️",
-  tag: "MANDATORY DEADLINE",
-  headline: "Submit All Tasks Before Monday!",
-  alertMessage: "Complete and submit all assigned tasks on time before Monday. Failure to submit before the deadline will result in your attendance being marked as ABSENT.",
-  reminderPoints: [
-    "📅 Complete all pending group tasks on time",
-    "⏰ Final cutoff: Before Monday session starts",
-    "❌ Late or missing submissions will lead to Absent attendance mark",
-    "🚀 Coordinate with your teammates to wrap up early!"
+  tag: "🚨 0 TASK • 0 ATTENDANCE ALERT",
+  alertMessage: "We are sorry to inform that the following groups have not completed even a single task. Therefore, attendance for the last 4 days classes will not be marked.",
+  // Affected groups:
+  targetGroups: [
+    "Group 5",
+    "Group 6",
+    "Group 7",
+    "Group 8",
+    "Group 9",
+    "Group 10"
   ],
-  buttonText: "I UNDERSTAND & WILL SUBMIT 👍"
+  reminderPoints: [
+    "❌ 0 Tasks Completed across the last 4 classes",
+    "📅 0 Attendance granted for the last 4 class days",
+    "⚡ Complete and submit all tasks to recover attendance"
+  ],
+  buttonText: "I UNDERSTAND & WILL SUBMIT"
 };
 
 // ─── Modal Popup Logic ────────────────────────────────────────────────────────
@@ -32,54 +38,51 @@ const PERFORMER_OF_THE_DAY = {
     // Create modal DOM elements
     const overlay = document.createElement('div');
     overlay.id = 'performer-modal-overlay';
-    overlay.className = 'genz-popup-overlay alert-mode';
+    overlay.className = 'genz-popup-overlay alert-mode red-alert-theme';
 
     const pointsHtml = PERFORMER_OF_THE_DAY.reminderPoints
       .map(point => `<li class="alert-point-item"><span class="point-text">${point}</span></li>`)
       .join('');
 
+    const groupsHtml = (PERFORMER_OF_THE_DAY.targetGroups || [])
+      .map(group => `<span class="alert-group-tag">${group}</span>`)
+      .join('');
+
     overlay.innerHTML = `
-      <div class="genz-popup-card alert-card">
+      <div class="genz-popup-card alert-card red-alert-card">
         <!-- Close Button -->
         <button class="genz-close-btn" id="close-performer-modal" aria-label="Close">✕</button>
 
-        <!-- Floating decorative icons -->
-        <div class="genz-floating-emoji emoji-1">⚠️</div>
-        <div class="genz-floating-emoji emoji-2">⏰</div>
-        <div class="genz-floating-emoji emoji-3">📝</div>
-        <div class="genz-floating-emoji emoji-4">🚨</div>
-
         <!-- Alert Badge / Tag -->
-        <div class="alert-top-badge">
+        <div class="alert-top-badge red-pulse-badge">
           <span class="alert-pulse-dot"></span>
           ${PERFORMER_OF_THE_DAY.tag}
         </div>
 
-        <div class="genz-badge alert-header-badge">${PERFORMER_OF_THE_DAY.badge}</div>
-
-        <!-- Headline -->
-        <div class="alert-headline-box">
-          <h2 class="alert-main-title">${PERFORMER_OF_THE_DAY.headline}</h2>
+        <!-- Alert Message Box -->
+        <div class="alert-warning-box red-warning-box">
+          <div class="alert-warning-text">
+            ${PERFORMER_OF_THE_DAY.alertMessage}
+          </div>
         </div>
 
-        <!-- Urgent Message Card -->
-        <div class="alert-warning-box">
-          <div class="alert-warning-icon">📢</div>
-          <div class="alert-warning-text">
-            <strong>Important Notice:</strong> ${PERFORMER_OF_THE_DAY.alertMessage}
+        <!-- Affected Groups List -->
+        <div class="alert-affected-groups-section">
+          <div class="alert-groups-label">⚠️ AFFECTED GROUPS:</div>
+          <div class="alert-groups-tags-container">
+            ${groupsHtml}
           </div>
         </div>
 
         <!-- Action points checklist -->
         <div class="alert-points-section">
-          <div class="alert-points-label">📌 Submission Guidelines:</div>
           <ul class="alert-points-list">
             ${pointsHtml}
           </ul>
         </div>
 
         <!-- Action Button -->
-        <button class="genz-action-btn alert-confirm-btn" id="hype-performer-modal">
+        <button class="genz-action-btn alert-confirm-btn red-action-btn" id="hype-performer-modal">
           ${PERFORMER_OF_THE_DAY.buttonText}
         </button>
       </div>
