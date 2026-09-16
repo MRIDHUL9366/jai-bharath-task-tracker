@@ -212,59 +212,108 @@ function renderGroupCards(filter = "") {
 $("group-search").addEventListener("input", (e) => renderGroupCards(e.target.value));
 
 /* ─────────────────────────────────────────────
-   Tasks Section
-   Auto-derives: which groups completed each task
-   Adding a task to TASKS[] auto-shows it here
+   Tasks Section – Grid Dashboard Tiles
+   Auto-derives: donut chart, stats, group chips
 ───────────────────────────────────────────── */
 function renderTaskList() {
   $("task-list").innerHTML = TASKS.map((t) => {
     const completedBy = GROUPS.filter((g) => g.completedTasks.includes(t.id));
     const pendingBy = GROUPS.filter((g) => !g.completedTasks.includes(t.id));
+    const pct = Math.round((completedBy.length / GROUPS.length) * 100);
 
-    const completedChips = completedBy
-      .map(
-        (g) =>
-          `<span class="task-group-chip chip-green">
-             ✅ ${g.name}
-           </span>`
-      )
-      .join("");
-
-    const pendingChips = pendingBy
-      .map(
-        (g) =>
-          `<span class="task-group-chip chip-red">
-             ❌ ${g.name}
-           </span>`
-      )
-      .join("");
+    // Donut chart SVG calculations
+    const radius = 28;
+    const circumference = 2 * Math.PI * radius;
+    const offset = circumference - (pct / 100) * circumference;
+    const donutColor = pct === 100 ? 'green' : pct >= 30 ? 'amber' : 'red';
 
     const due = new Date(t.dueDate).toLocaleDateString("en-IN", {
       day: "2-digit", month: "short", year: "numeric"
     });
 
+    const doneChips = completedBy
+      .map((g) => `<span class="tile-chip tile-chip-done">✅ ${g.name}</span>`)
+      .join("");
+
+    const pendingChips = pendingBy
+      .map((g) => `<span class="tile-chip tile-chip-pending">❌ ${g.name}</span>`)
+      .join("");
+
     return `
-      <div class="task-card">
-        <div class="task-card-header">
-          <h3 class="task-title">${t.title}</h3>
-          <span class="task-date-pill">📅 Assigned Date: ${due}</span>
+      <div class="task-tile" data-task-id="${t.id}">
+        <div class="tile-accent"></div>
+
+        <div class="tile-header">
+          <div class="tile-title-area">
+            <h3 class="tile-task-name">📌 ${t.title}</h3>
+            <span class="tile-date">📅 ${due}</span>
+          </div>
+          <div class="tile-donut-wrap">
+            <svg class="tile-donut-svg" viewBox="0 0 68 68">
+              <circle class="donut-track" cx="34" cy="34" r="${radius}" />
+              <circle class="donut-fill donut-fill-${donutColor}"
+                cx="34" cy="34" r="${radius}"
+                stroke-dasharray="${circumference}"
+                stroke-dashoffset="${offset}" />
+            </svg>
+            <div class="tile-donut-center">
+              <span class="donut-pct">${pct}%</span>
+              <span class="donut-label">Done</span>
+            </div>
+          </div>
         </div>
 
-        <p class="task-note">📝 Note: Complete the task before the assigned date.</p>
-        
-        <hr class="task-divider">
-
-        <div class="task-status-container">
-          <div class="task-status-label">
-            <span>Group Status (${completedBy.length} / ${GROUPS.length} Done)</span>
+        <div class="tile-stats">
+          <div class="tile-stat">
+            <span class="stat-num stat-num-done">${completedBy.length}</span>
+            <span class="stat-label">Done</span>
           </div>
-          <div class="task-groups-grid">
-            ${completedChips}
-            ${pendingChips}
+          <div class="tile-stat">
+            <span class="stat-num stat-num-pending">${pendingBy.length}</span>
+            <span class="stat-label">Pending</span>
+          </div>
+          <div class="tile-stat">
+            <span class="stat-num stat-num-total">${GROUPS.length}</span>
+            <span class="stat-label">Total</span>
+          </div>
+        </div>
+
+        <button class="tile-toggle" data-toggle-task="${t.id}">
+          <span>View Groups</span>
+          <span class="tile-toggle-arrow">▼</span>
+        </button>
+
+        <div class="tile-groups-panel" id="panel-task-${t.id}">
+          <div class="tile-groups-inner">
+            ${doneChips ? `
+              <div class="tile-group-section-label">✅ Completed (${completedBy.length})</div>
+              <div class="tile-groups-wrap">${doneChips}</div>
+            ` : ''}
+            ${pendingChips ? `
+              <div class="tile-group-section-label">⏳ Pending (${pendingBy.length})</div>
+              <div class="tile-groups-wrap">${pendingChips}</div>
+            ` : ''}
           </div>
         </div>
       </div>`;
   }).join("");
+
+  // Attach collapse/expand toggle listeners
+  document.querySelectorAll(".tile-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const taskId = btn.dataset.toggleTask;
+      const panel = document.getElementById("panel-task-" + taskId);
+      const isOpen = btn.classList.toggle("open");
+
+      if (isOpen) {
+        panel.classList.add("expanded");
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      } else {
+        panel.style.maxHeight = "0px";
+        setTimeout(() => panel.classList.remove("expanded"), 400);
+      }
+    });
+  });
 }
 
 /* ─────────────────────────────────────────────

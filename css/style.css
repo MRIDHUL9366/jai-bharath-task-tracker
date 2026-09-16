@@ -480,112 +480,359 @@ body {
   transform: scale(1.03);
 }
 
-/* ── Task Cards (Simple, Clean & Responsive) ── */
+/* ═══════════════════════════════════════════════
+   Task Section – Grid Dashboard Tiles
+   Donut charts, stat counters, collapsible groups
+═══════════════════════════════════════════════ */
 .task-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.2rem;
 }
 
-.task-card {
-  border-radius: var(--radius);
-  padding: 1.3rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+/* ── Dashboard Tile ──────────────────────────── */
+.task-tile {
   background: var(--card);
+  border-radius: 16px;
+  padding: 0;
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-subtle);
-  border-left: 5px solid var(--primary);
-  transition: box-shadow 0.18s ease, background var(--transition-theme);
+  border: 1.5px solid var(--border-subtle);
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease,
+    background var(--transition-theme);
 }
 
-.task-card:hover {
-  box-shadow: var(--shadow);
+.task-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0, 109, 119, 0.15);
 }
 
-.task-card-header {
+/* ── Tile Top Bar (colored accent) ───────────── */
+.tile-accent {
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 60%, var(--accent) 100%);
+}
+
+/* ── Tile Header ─────────────────────────────── */
+.tile-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.task-title {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: var(--primary-d);
-  margin: 0;
-}
-
-.task-date-pill {
-  font-size: 0.84rem;
-  color: var(--muted);
-  font-weight: 600;
-}
-
-.task-note {
-  font-size: 0.86rem;
-  color: var(--primary);
-  font-style: italic;
-  margin: 0;
-}
-
-.task-divider {
-  border: none;
-  border-top: 1px solid var(--border-subtle);
-  margin: 0.2rem 0;
-}
-
-.task-status-container {
-  display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem 1.2rem 0.5rem;
   gap: 0.6rem;
 }
 
-.task-status-label {
-  font-size: 0.78rem;
+.tile-title-area {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.tile-task-name {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--primary-d);
+  letter-spacing: -0.01em;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tile-date {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* ── Donut Chart (SVG) ───────────────────────── */
+.tile-donut-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 68px;
+  height: 68px;
+}
+
+.tile-donut-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.donut-track {
+  fill: none;
+  stroke: var(--progress-track);
+  stroke-width: 6;
+}
+
+.donut-fill {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.donut-fill-green {
+  stroke: #10b981;
+  filter: drop-shadow(0 0 4px rgba(16, 185, 129, 0.4));
+}
+
+.donut-fill-amber {
+  stroke: #f59e0b;
+  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.4));
+}
+
+.donut-fill-red {
+  stroke: #ef4444;
+  filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.35));
+}
+
+.tile-donut-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.donut-pct {
+  font-size: 1.05rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--primary-d);
+}
+
+.donut-label {
+  font-size: 0.52rem;
+  font-weight: 700;
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  font-weight: 700;
+  margin-top: 1px;
 }
 
-.task-groups-grid {
+/* ── Stats Row ───────────────────────────────── */
+.tile-stats {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 1.2rem 0.6rem;
+}
+
+.tile-stat {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem 0.4rem;
+  border-radius: 10px;
+  background: rgba(0, 109, 119, 0.04);
+  border: 1px solid var(--border-subtle);
+  transition: background var(--transition-theme);
+}
+
+.stat-num {
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1.1;
+  display: block;
+}
+
+.stat-num-done {
+  color: #10b981;
+}
+
+.stat-num-pending {
+  color: #ef4444;
+}
+
+.stat-num-total {
+  color: var(--primary);
+}
+
+.stat-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-top: 2px;
+}
+
+/* ── Collapse Toggle Button ──────────────────── */
+.tile-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  width: 100%;
+  padding: 0.55rem 1rem;
+  background: rgba(0, 109, 119, 0.04);
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tile-toggle:hover {
+  background: rgba(0, 109, 119, 0.08);
+}
+
+.tile-toggle-arrow {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-size: 0.7rem;
+}
+
+.tile-toggle.open .tile-toggle-arrow {
+  transform: rotate(180deg);
+}
+
+/* ── Collapsible Group List ──────────────────── */
+.tile-groups-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(0, 109, 119, 0.02);
+}
+
+.tile-groups-panel.expanded {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.tile-groups-inner {
+  padding: 0.7rem 1rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.tile-group-section-label {
+  font-size: 0.66rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 0.1rem;
+}
+
+.tile-groups-wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
-.task-group-chip {
+/* ── Group Chips ─────────────────────────────── */
+.tile-chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0.85rem;
-  border-radius: 50px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  border: 1px solid transparent;
-  transition: transform 0.15s ease;
+  gap: 4px;
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  border: 1.5px solid transparent;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease;
+  cursor: default;
 }
 
-.task-group-chip:hover {
-  transform: translateY(-1px);
+.tile-chip:hover {
+  transform: translateY(-2px) scale(1.03);
 }
 
-/* Green for Completed */
-.chip-green {
-  background: #e6f9f0;
-  color: #0e8a55;
-  border-color: #a3e9c8;
+.tile-chip-done {
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+  border-color: rgba(16, 185, 129, 0.28);
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.1);
 }
 
-/* Red for Others/Pending */
-.chip-red {
-  background: #fdf2f2;
-  color: #c92a2a;
-  border-color: #f8d7da;
+.tile-chip-done:hover {
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.tile-chip-pending {
+  background: rgba(239, 68, 68, 0.08);
+  color: #dc2626;
+  border-color: rgba(239, 68, 68, 0.22);
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.08);
+}
+
+.tile-chip-pending:hover {
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.16);
+}
+
+/* ── Dark Theme Tile Overrides ───────────────── */
+[data-theme="dark"] .tile-stat {
+  background: rgba(77, 208, 225, 0.06);
+  border-color: rgba(77, 208, 225, 0.1);
+}
+
+[data-theme="dark"] .tile-toggle {
+  background: rgba(77, 208, 225, 0.04);
+  border-top-color: rgba(77, 208, 225, 0.1);
+}
+
+[data-theme="dark"] .tile-groups-panel {
+  background: rgba(77, 208, 225, 0.02);
+}
+
+[data-theme="dark"] .tile-chip-done {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="dark"] .tile-chip-pending {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+/* ── Neon Theme Tile Overrides ───────────────── */
+[data-theme="neon"] .tile-stat {
+  background: rgba(224, 64, 251, 0.06);
+  border-color: rgba(224, 64, 251, 0.12);
+}
+
+[data-theme="neon"] .tile-toggle {
+  background: rgba(224, 64, 251, 0.04);
+}
+
+/* ── Ocean Theme Tile Overrides ──────────────── */
+[data-theme="ocean"] .tile-stat {
+  background: rgba(100, 181, 246, 0.06);
+  border-color: rgba(100, 181, 246, 0.1);
+}
+
+[data-theme="ocean"] .tile-toggle {
+  background: rgba(100, 181, 246, 0.04);
+}
+
+/* ── Sunset Theme Tile Overrides ─────────────── */
+[data-theme="sunset"] .tile-stat {
+  background: rgba(230, 81, 0, 0.04);
+  border-color: rgba(230, 81, 0, 0.1);
+}
+
+[data-theme="sunset"] .tile-toggle {
+  background: rgba(230, 81, 0, 0.03);
 }
 
 /* ── Modal ────────────────────────────────── */
@@ -717,8 +964,17 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .task-card {
-    padding: 1.1rem 1.2rem;
+  .task-list {
+    grid-template-columns: 1fr;
+  }
+
+  .tile-donut-wrap {
+    width: 58px;
+    height: 58px;
+  }
+
+  .donut-pct {
+    font-size: 0.9rem;
   }
 
   .modal {
@@ -763,31 +1019,45 @@ body {
     font-size: 1.8rem;
   }
 
-  .task-card {
-    padding: 1rem 0.9rem;
+  .task-list {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
   }
 
-  .task-card-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.3rem;
+  .tile-header {
+    padding: 0.75rem 0.9rem 0.4rem;
   }
 
-  .task-title {
-    font-size: 1.1rem;
+  .tile-task-name {
+    font-size: 1rem;
   }
 
-  .task-date-pill {
-    font-size: 0.8rem;
+  .tile-donut-wrap {
+    width: 52px;
+    height: 52px;
   }
 
-  .task-groups-grid {
-    gap: 0.4rem;
+  .donut-pct {
+    font-size: 0.85rem;
   }
 
-  .task-group-chip {
-    padding: 0.3rem 0.65rem;
-    font-size: 0.75rem;
+  .tile-stats {
+    padding: 0 0.9rem 0.5rem;
+    gap: 0.35rem;
+  }
+
+  .stat-num {
+    font-size: 1rem;
+  }
+
+  .tile-toggle {
+    font-size: 0.68rem;
+    padding: 0.45rem 0.8rem;
+  }
+
+  .tile-chip {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.55rem;
   }
 
   .leaderboard-table th,
@@ -1215,10 +1485,12 @@ body {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
   }
+
   70% {
     transform: scale(1);
     box-shadow: 0 0 0 6px rgba(245, 158, 11, 0);
   }
+
   100% {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
