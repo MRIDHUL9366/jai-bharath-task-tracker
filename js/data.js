@@ -82,7 +82,7 @@ const GROUPS = [
     id: 10,
     name: "Group 10",
     color: "#c77dff",
-    members: ["Shana", "Shahma", "Nuzha"],
+    members: ["Shana", "Sruthi", "Nuzha", "Hanna Harees"],
     completedTasks: [],
     avatar: "10"
   },
