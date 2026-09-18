@@ -3,6 +3,7 @@
 // HOW TO UPDATE:
 //   1. Add a new task to TASKS[] (give it the next id, title, dueDate)
 //   2. For each group that completes a task, add the task id to completedTasks[]
+//   3. From Task 7 onward, set downloadUrl to the Word file path
 //   Everything else (counts, rankings, progress, task views) auto-updates.
 
 const GROUPS = [
@@ -106,38 +107,46 @@ const GROUPS = [
 ];
 
 // ─── ADD NEW TASKS HERE ───────────────────────────────────────────────────────
-// Each task is automatically assigned to ALL groups.
-// Just update completedTasks[] above for the groups that finish each task.
+// Each task needs: id, title, dueDate
+// From Task 7 onward, add downloadUrl for the Word file link
+//   downloadUrl: "downloads/task7_plan.docx"  (or "" if not ready yet → shows "Coming Soon")
+
 const TASKS = [
   {
     id: 1,
-    title: "Task 1",
-    dueDate: "2026-09-07"
+    title: "Django Project Setup",
+    dueDate: "2026-09-12"
   },
   {
     id: 2,
-    title: "Task 2",
-    dueDate: "2026-09-08"
+    title: "App, URL, View & Template Setup",
+    dueDate: "2026-09-13"
   },
   {
     id: 3,
-    title: "Task 3",
-    dueDate: "2026-09-09"
+    title: "Login & Register Page Navigation",
+    dueDate: "2026-09-14"
   },
   {
     id: 4,
-    title: "Task 4",
-    dueDate: "2026-09-10"
+    title: "Login & Registration Forms",
+    dueDate: "2026-09-15"
   },
   {
     id: 5,
-    title: "Task 5",
-    dueDate: "2026-09-24"
+    title: "GET & POST Form Handling",
+    dueDate: "2026-09-16"
   },
   {
     id: 6,
-    title: "Task 6",
+    title: "User Registration & Login Authentication",
     dueDate: "2026-09-17"
+  },
+  {
+    id: 7,
+    title: "Admin & Customer Login Separation",
+    dueDate: "2026-09-18",
+    downloadUrl: "media/Jaybharath_Task_7_Admin_Customer_Login_Separation.docx"  // Add the Word file path here, e.g. "downloads/task7_plan.docx"
   }
 
 ];

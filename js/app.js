@@ -212,108 +212,53 @@ function renderGroupCards(filter = "") {
 $("group-search").addEventListener("input", (e) => renderGroupCards(e.target.value));
 
 /* ─────────────────────────────────────────────
-   Tasks Section – Grid Dashboard Tiles
-   Auto-derives: donut chart, stats, group chips
+   Tasks Section – Unique Task Cards
+   Shows task number, date, title, and centered download button (Task 7 onwards)
 ───────────────────────────────────────────── */
 function renderTaskList() {
-  $("task-list").innerHTML = TASKS.map((t) => {
-    const completedBy = GROUPS.filter((g) => g.completedTasks.includes(t.id));
-    const pendingBy = GROUPS.filter((g) => !g.completedTasks.includes(t.id));
-    const pct = Math.round((completedBy.length / GROUPS.length) * 100);
+  const headerHtml = `
+    <div class="task-timeline-header">
+      <h2 class="task-timeline-title">📋 Task Timeline</h2>
+      <p class="task-timeline-subtitle">Django Full Stack Development — Daily Task Progress</p>
+    </div>`;
 
-    // Donut chart SVG calculations
-    const radius = 28;
-    const circumference = 2 * Math.PI * radius;
-    const offset = circumference - (pct / 100) * circumference;
-    const donutColor = pct === 100 ? 'green' : pct >= 30 ? 'amber' : 'red';
+  const cardsHtml = TASKS.map((t, index) => {
+    const dueDate = new Date(t.dueDate);
+    const dayNum = dueDate.toLocaleDateString("en-IN", { day: "2-digit" });
+    const monthName = dueDate.toLocaleDateString("en-IN", { month: "short" });
+    const yearNum = dueDate.toLocaleDateString("en-IN", { year: "numeric" });
+    const dateFormatted = `${dayNum} ${monthName} ${yearNum}`;
 
-    const due = new Date(t.dueDate).toLocaleDateString("en-IN", {
-      day: "2-digit", month: "short", year: "numeric"
-    });
+    const taskNum = String(t.id).padStart(2, '0');
 
-    const doneChips = completedBy
-      .map((g) => `<span class="tile-chip tile-chip-done">✅ ${g.name}</span>`)
-      .join("");
-
-    const pendingChips = pendingBy
-      .map((g) => `<span class="tile-chip tile-chip-pending">❌ ${g.name}</span>`)
-      .join("");
+    // Download button: ONLY for tasks with a non-empty downloadUrl string (Task 7 onwards)
+    const hasDownloadUrl = typeof t.downloadUrl === 'string' && t.downloadUrl.trim().length > 0;
+    
+    const downloadBtnHtml = hasDownloadUrl ? `
+      <div class="task-card-action-center">
+        <button class="task-download-btn-centered"
+          onclick="window.open('${t.downloadUrl}', '_blank')"
+          title="Download Task ${t.id} Word File (.docx)">
+          <span class="download-icon">📥</span>
+          <span class="download-text">Download Task ${t.id} Plan (.docx)</span>
+        </button>
+      </div>` : '';
 
     return `
-      <div class="task-tile" data-task-id="${t.id}">
-        <div class="tile-accent"></div>
-
-        <div class="tile-header">
-          <div class="tile-title-area">
-            <h3 class="tile-task-name">📌 ${t.title}</h3>
-            <span class="tile-date">📅 ${due}</span>
+      <div class="task-card" style="--card-delay: ${index * 0.07}s">
+        <div class="task-card-accent"></div>
+        <div class="task-card-inner">
+          <div class="task-card-header">
+            <span class="task-number-badge">Task ${taskNum}</span>
+            <span class="task-date-badge">📅 ${dateFormatted}</span>
           </div>
-          <div class="tile-donut-wrap">
-            <svg class="tile-donut-svg" viewBox="0 0 68 68">
-              <circle class="donut-track" cx="34" cy="34" r="${radius}" />
-              <circle class="donut-fill donut-fill-${donutColor}"
-                cx="34" cy="34" r="${radius}"
-                stroke-dasharray="${circumference}"
-                stroke-dashoffset="${offset}" />
-            </svg>
-            <div class="tile-donut-center">
-              <span class="donut-pct">${pct}%</span>
-              <span class="donut-label">Done</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="tile-stats">
-          <div class="tile-stat">
-            <span class="stat-num stat-num-done">${completedBy.length}</span>
-            <span class="stat-label">Done</span>
-          </div>
-          <div class="tile-stat">
-            <span class="stat-num stat-num-pending">${pendingBy.length}</span>
-            <span class="stat-label">Pending</span>
-          </div>
-          <div class="tile-stat">
-            <span class="stat-num stat-num-total">${GROUPS.length}</span>
-            <span class="stat-label">Total</span>
-          </div>
-        </div>
-
-        <button class="tile-toggle" data-toggle-task="${t.id}">
-          <span>View Groups</span>
-          <span class="tile-toggle-arrow">▼</span>
-        </button>
-
-        <div class="tile-groups-panel" id="panel-task-${t.id}">
-          <div class="tile-groups-inner">
-            ${doneChips ? `
-              <div class="tile-group-section-label">✅ Completed (${completedBy.length})</div>
-              <div class="tile-groups-wrap">${doneChips}</div>
-            ` : ''}
-            ${pendingChips ? `
-              <div class="tile-group-section-label">⏳ Pending (${pendingBy.length})</div>
-              <div class="tile-groups-wrap">${pendingChips}</div>
-            ` : ''}
-          </div>
+          <h3 class="task-card-title">${t.title}</h3>
+          ${downloadBtnHtml}
         </div>
       </div>`;
   }).join("");
 
-  // Attach collapse/expand toggle listeners
-  document.querySelectorAll(".tile-toggle").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const taskId = btn.dataset.toggleTask;
-      const panel = document.getElementById("panel-task-" + taskId);
-      const isOpen = btn.classList.toggle("open");
-
-      if (isOpen) {
-        panel.classList.add("expanded");
-        panel.style.maxHeight = panel.scrollHeight + "px";
-      } else {
-        panel.style.maxHeight = "0px";
-        setTimeout(() => panel.classList.remove("expanded"), 400);
-      }
-    });
-  });
+  $("task-list").innerHTML = headerHtml + cardsHtml;
 }
 
 /* ─────────────────────────────────────────────
