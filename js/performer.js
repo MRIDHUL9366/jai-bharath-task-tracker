@@ -13,16 +13,17 @@
 
 const DAILY_ANNOUNCEMENT = {
   enabled: true, // 💡 Set to false to disable/hide popup completely!
-  tag: "📢 TODAY'S TASK ANNOUNCEMENT",
-  title: "Task 7 – Admin & Customer Login Separation",
-  taskBadge: "📅 18 Sept 2026 • New Task Released",
-  message: "Hello everyone! Today's new task plan is live. Please check the <strong>Tasks</strong> tab to view full details and download your Word file task plan.",
+  tag: "📢 IMPORTANT CLASS ANNOUNCEMENT",
+  title: "Laptop & Project Sharing Notice",
+  taskBadge: "📅 Requirement for Upcoming Classes",
+  message: "Dear Students, please try to join future classes using a <strong>laptop</strong>. Creating and sharing your project live will help us easily track any mistakes and assist you much better. We kindly request everyone's cooperation for upcoming classes!",
   highlights: [
-    "📝 Topic: Admin & Customer Login Separation",
-    "📅 Date: 18 Sept 2026",
-    "📥 Download Word plan directly in the Tasks section"
+    "💻 Join upcoming classes using a laptop",
+    "📂 Create & share your project during live sessions",
+    "🔍 Enables us to track errors quickly & assist you better",
+    "🤝 Thank you for your cooperation in future classes!"
   ],
-  buttonText: "Got It! Let's Code 🚀"
+  buttonText: "Got It! I'll Cooperate 🚀"
 };
 
 // ─── Modal Popup Logic ────────────────────────────────────────────────────────
