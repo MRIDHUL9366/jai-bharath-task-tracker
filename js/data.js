@@ -115,27 +115,27 @@ const TASKS = [
   {
     id: 1,
     title: "Django Project Setup",
-    dueDate: "2026-09-12"
+    dueDate: "2026-09-07"
   },
   {
     id: 2,
     title: "App, URL, View & Template Setup",
-    dueDate: "2026-09-13"
+    dueDate: "2026-09-08"
   },
   {
     id: 3,
     title: "Login & Register Page Navigation",
-    dueDate: "2026-09-14"
+    dueDate: "2026-09-09"
   },
   {
     id: 4,
     title: "Login & Registration Forms",
-    dueDate: "2026-09-15"
+    dueDate: "2026-09-10"
   },
   {
     id: 5,
     title: "GET & POST Form Handling",
-    dueDate: "2026-09-16"
+    dueDate: "2026-09-14"
   },
   {
     id: 6,
@@ -147,6 +147,12 @@ const TASKS = [
     title: "Admin & Customer Login Separation",
     dueDate: "2026-09-18",
     downloadUrl: "media/Jaybharath_Task_7_Admin_Customer_Login_Separation.docx"  // Add the Word file path here, e.g. "downloads/task7_plan.docx"
+  },
+  {
+    id: 8,
+    title: "Product Model & Media Configuration",
+    dueDate: "2026-09-24",
+    downloadUrl: "media/Jai_Bharath_Django_Task_8_24-09-2026_Updated.docx"
   }
 
 ];
