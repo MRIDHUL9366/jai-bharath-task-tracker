@@ -13,17 +13,16 @@
 
 const DAILY_ANNOUNCEMENT = {
   enabled: true, // 💡 Set to false to disable/hide popup completely!
-  tag: "📢 IMPORTANT CLASS ANNOUNCEMENT",
-  title: "Laptop & Project Sharing Notice",
-  taskBadge: "📅 Requirement for Upcoming Classes",
-  message: "Dear Students, please try to join future classes using a <strong>laptop</strong>. Creating and sharing your project live will help us easily track any mistakes and assist you much better. We kindly request everyone's cooperation for upcoming classes!",
+  tag: "📢 IMPORTANT TASK ANNOUNCEMENT",
+  title: "Task 7 & Task 8 Deadline Notice",
+  taskBadge: "📅 Due Date: Saturday (26th)",
+  message: "Dear Students, please complete <strong>Task 7 and Task 8</strong> before <strong>Saturday (26th)</strong>. Kindly check Google Drive for reference videos and check the Task Console to get your Task Word document.",
   highlights: [
-    "💻 Join upcoming classes using a laptop",
-    "📂 Create & share your project during live sessions",
-    "🔍 Enables us to track errors quickly & assist you better",
-    "🤝 Thank you for your cooperation in future classes!"
+    "⏳ Complete Task 7 & Task 8 before Saturday (26th)",
+    "🎥 Check Google Drive for reference videos",
+    "📄 Check Task Console to get the Task Word document"
   ],
-  buttonText: "Got It! I'll Cooperate 🚀"
+  buttonText: "Got It! I'll Complete 🚀"
 };
 
 // ─── Modal Popup Logic ────────────────────────────────────────────────────────
