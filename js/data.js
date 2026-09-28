@@ -153,6 +153,12 @@ const TASKS = [
     title: "Product Model & Media Configuration",
     dueDate: "2026-09-24",
     downloadUrl: "media/Jai_Bharath_Django_Task_8_24-09-2026_Updated.docx"
+  },
+  {
+    id: 9,
+    title: "Add and View Product",
+    dueDate: "2026-09-28",
+    downloadUrl: "media/Jai_Bharath_Task_9_Add_and_View_Product.docx"
   }
 
 ];
