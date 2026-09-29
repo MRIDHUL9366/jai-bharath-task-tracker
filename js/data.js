@@ -159,6 +159,12 @@ const TASKS = [
     title: "Add and View Product",
     dueDate: "2026-09-28",
     downloadUrl: "media/Jai_Bharath_Task_9_Add_and_View_Product.docx"
+  },
+  {
+    id: 10,
+    title: "Edit and Delete Product",
+    dueDate: "2026-09-29",
+    downloadUrl: "media/Jai_Bharath_Task_10_Edit_Delete_Product_Final.docx"
   }
 
 ];
