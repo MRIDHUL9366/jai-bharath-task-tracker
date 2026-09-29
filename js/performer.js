@@ -14,12 +14,12 @@
 const DAILY_ANNOUNCEMENT = {
   enabled: true, // 💡 Set to false to disable/hide popup completely!
   tag: "📢 NEW TASK RELEASED",
-  title: "Task 9: Add and View Product",
-  taskBadge: "📅 Due Date: 28th Sep 2026",
-  message: "Dear Students, <strong>Task 9 (Add and View Product)</strong> is now live! Kindly check Google Drive for reference videos and download the Task 9 Word document from the Task Console.",
+  title: "Task 10",
+  taskBadge: "📅 New Task Available",
+  message: "Dear Students, <strong>Task 10</strong> is now live! Kindly check Google Drive for reference videos and download the Task 10 Word document from the Task Console.",
   highlights: [
-    "🚀 Task 9: Add and View Product is now live!",
-    "📄 Download Task 9 Plan (.docx) from the Task Console",
+    "🚀 Task 10 is now live!",
+    "📄 Download Task 10 Plan (.docx) from the Task Console",
     "🎥 Check Google Drive for reference videos & instructions"
   ],
   buttonText: "Got It! I'll Complete 🚀"
