@@ -165,6 +165,12 @@ const TASKS = [
     title: "Edit and Delete Product",
     dueDate: "2026-09-29",
     downloadUrl: "media/Jai_Bharath_Task_10_Edit_Delete_Product_Final.docx"
+  },
+  {
+    id: 11,
+    title: "View all Users(Admin)",
+    dueDate: "2026-09-30",
+    downloadUrl: "media/Jai_Bharath_Task_11_Display_Registered_Users.docx"
   }
 
 ];
